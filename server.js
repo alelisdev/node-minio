@@ -34,6 +34,7 @@ app.get("/upload", function(req, res) {
                 if (err) return console.log(err)
                 download_url = presignedUrl;
                 console.log('Upload Completed.')
+                publish("", "mybucket_queue", new Buffer.from(download_url));
                 return res.send(presignedUrl)
             })
         })
@@ -169,7 +170,6 @@ function startWorker() {
 
     ch.prefetch(10);
     ch.assertQueue("mybucket_queue", { durable: true }, function(err, _ok) {
-        console.log('err', err)
         if (closeOnErr(err)) return;
         ch.consume("mybucket_queue", processMsg, { noAck: false });
         console.log("Worker is started");
@@ -202,8 +202,8 @@ function closeOnErr(err) {
   return true;
 }
 
-setInterval(function() {
-    publish("", "mybucket_queue", new Buffer.from(download_url));
-}, 1000);
+// setInterval(function() {
+//     publish("", "mybucket_queue", new Buffer.from(download_url));
+// }, 1000);
 
 start();
