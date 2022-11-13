@@ -44,10 +44,10 @@ app.get("/upload", function(req, res) {
 // download file from the link to local directory called outgoing
 app.get("/download", function(req, res) {
     
-    minioClient.getObject("mybucket", 'example.pdf', function(error, stream) {
-        if(error) {
-            return response.status(500).send(error);
-        }
+    // minioClient.getObject("mybucket", 'example.pdf', function(error, stream) {
+    //     if(error) {
+    //         return response.status(500).send(error);
+    //     }
 
         const dir = `${__dirname}/Incoming/example.pdf`;
         const file = fs.createWriteStream(dir);
@@ -61,7 +61,7 @@ app.get("/download", function(req, res) {
                 res.send('Download completed')
             });
         });
-    });
+    // });
 });
 
 
