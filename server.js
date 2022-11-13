@@ -64,7 +64,6 @@ app.get("/download", function(req, res) {
     // });
 });
 
-
 //Create new Bucket
 // minioClient.makeBucket('mybucket', 'us-east-1', function(err) {
 //     if (err) return console.log('Error creating bucket.', err)
