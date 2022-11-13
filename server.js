@@ -82,7 +82,6 @@ minioClient.bucketExists('mybucket', function(err, exists) {
     }
 })
 
-
 // if the connection is closed or fails to be established at all, we will reconnect
 var amqpConn = null;
 const amqp_url = 'amqp://localhost';
@@ -200,9 +199,5 @@ function closeOnErr(err) {
   amqpConn.close();
   return true;
 }
-
-// setInterval(function() {
-//     publish("", "mybucket_queue", new Buffer.from(download_url));
-// }, 1000);
 
 start();
